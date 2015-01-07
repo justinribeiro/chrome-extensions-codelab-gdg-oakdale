@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "My Assigned Issues",
+  "version": "1.0",
+  "icons": {
+    "19":"img/GitHub-Mark-19px.png",
+    "38":"img/GitHub-Mark-38px.png",
+    "64":"img/GitHub-Mark-64px.png",
+    "128":"img/GitHub-Mark-128px.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19":"img/GitHub-Mark-19px.png",
+      "38":"img/GitHub-Mark-38px.png"
+    }
+  }
+}

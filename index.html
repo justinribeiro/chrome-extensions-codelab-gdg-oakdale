@@ -72,7 +72,7 @@
   "name": "My Assigned Issues",
   "version": "1.0",
   "icons": {
-    "64":"img/icon64.png",
+    "64":"img/GitHub-Mark-64px.png"
   }
 }
 </code></pre>
@@ -91,13 +91,16 @@
   "name": "My Assigned Issues",
   "version": "1.0",
   "icons": {
-    "64":"img/icon64.png",
+    "19":"img/GitHub-Mark-19px.png",
+    "38":"img/GitHub-Mark-38px.png",
+    "64":"img/GitHub-Mark-64px.png",
+    "128":"img/GitHub-Mark-128px.png"
   },
   "browser_action": {
     "default_icon": {
-      "19":"img/icon19.png",
-      "38":"img/icon38.png"
-    }
+      "19":"img/GitHub-Mark-19px.png",
+      "38":"img/GitHub-Mark-38px.png"
+    },
   }
 }
 </code></pre>
@@ -125,12 +128,15 @@
   "name": "My Assigned Issues",
   "version": "1.0",
   "icons": {
-    "64":"img/icon64.png",
+    "19":"img/GitHub-Mark-19px.png",
+    "38":"img/GitHub-Mark-38px.png",
+    "64":"img/GitHub-Mark-64px.png",
+    "128":"img/GitHub-Mark-128px.png"
   },
   "browser_action": {
     "default_icon": {
-      "19":"img/icon19.png",
-      "38":"img/icon38.png"
+      "19":"img/GitHub-Mark-19px.png",
+      "38":"img/GitHub-Mark-38px.png"
     },
     "default_popup": "popup.html"
   }
@@ -163,8 +169,8 @@
 
       <p>Let's also add a couple of files so we can do some additional work:</p>
       
-<pre><code>➜ ~ touch popup.js
-➜ ~ touch popup.css
+<pre><code>➜ ~ touch js/popup.js
+➜ ~ touch css/popup.css
 </code></pre>
 
       <p>The popup.js is important; all our application code is going to run within this file. With Chrome Extentions, we can't use inline script code within our html.</p>
@@ -204,17 +210,17 @@ GitHub.getMyIssues(myToken).then(function (issues) {
   // {array of object} issues
   // definition: https://developer.github.com/v3/issues/#list-issues
   //
-  //  TODO: loop over issues and append list item(s)
+  //  IMPLEMENT: loop over issues and append list item(s)
   //
 
 });
 
 GitHub.getMe(myToken).then(function (me) {
 
-  // {array} me
+  // {object} me
   // definition: https://developer.github.com/v3/users/#get-the-authenticated-user
   //
-  //  TODO: loop over issues and append list item(s)
+  //  IMPLEMENT: set username and avatar in DOM
   //
 
 });
@@ -283,7 +289,7 @@ GitHub.getMe(myToken).then(function (me) {
       
       <p>First, let's create a background.js file:</p>
 
-<pre><code>➜ ~ touch background.js
+<pre><code>➜ ~ touch js/background.js
 </code></pre>
 
       <p>Now we need to make Chrome aware that it will run in the background by updating our manifest.json:</p>
@@ -445,11 +451,11 @@ updateUser();
       <p>Since we're now doing work in the background, we also need to update the popup.js so that we can use the locally stored data:</p>
 
 <pre><code>chrome.storage.local.get(['user', 'issues'], function(data) {
-  // TODO: set username
+  // IMPLEMENT: set username
 
-  // TODO: set avatar
+  // IMPLEMENT: set avatar
 
-  // TODO: set issue list
+  // IMPLEMENT: set issue list
 });
 </code></pre>
 
@@ -464,6 +470,7 @@ updateUser();
       <p>While defining our token in our code might be simple for us, if we have other users, that would be an issues. We can instead add an options menu to our extension. Let's start by creating an options.html:</p>
 
 <pre><code>➜ ~ touch options.html
+➜ ~ touch js/options.js
 </code></pre>
 
       <p>Now, let's update our manifest with the options_page property:</p>

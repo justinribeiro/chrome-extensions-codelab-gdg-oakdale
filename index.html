@@ -72,7 +72,7 @@
   "name": "My Assigned Issues",
   "version": "1.0",
   "icons": {
-    "64":"img/GitHub-Mark-64px.png"
+    "64":"img/icon-64px.png"
   }
 }
 </code></pre>
@@ -80,8 +80,12 @@
 <p><blockquote>Don't have icons? No worries! There are some icons in the repo in the step-01 folder. Download them and drop them in.</blockquote></p>
       
       <p>Look good? Great! Let's test our extension in Chrome. To load our extension, we need to enable Developer Mode on chrome://extensions/ by using the checkbox:</p>
+
+      <img src="images/screenshot-20150108-enable-developer-mode.png" alt="Enable Developer Mode">
       
       <p>Now, use the "load unpacked extension..." button and location your project folder. If all is successful, you should see the extension loaded:</p>
+
+      <img src="images/screenshot-20150108-first-load.png" alt="Loading our extension.">
       
       <p>Great! Every extension needs a toolbar icon however, so let's add one shall we? Remember all those icons we downloaded? Let's use the browser_action attribute in our manifest.json file to add</p>
       
@@ -91,21 +95,23 @@
   "name": "My Assigned Issues",
   "version": "1.0",
   "icons": {
-    "19":"img/GitHub-Mark-19px.png",
-    "38":"img/GitHub-Mark-38px.png",
-    "64":"img/GitHub-Mark-64px.png",
-    "128":"img/GitHub-Mark-128px.png"
+    "19":"img/icon-19px.png",
+    "38":"img/icon-38px.png",
+    "64":"img/icon-64px.png",
+    "128":"img/icon-128px.png"
   },
   "browser_action": {
     "default_icon": {
-      "19":"img/GitHub-Mark-19px.png",
-      "38":"img/GitHub-Mark-38px.png"
+      "19":"img/icon-19px.png",
+      "38":"img/icon-38px.png"
     },
   }
 }
 </code></pre>
 
       <p>After making the update to our manifest, we can reload the extension to test the change using the "Reload" link under extension details. After reloading, we should now see our browser icon:</p>
+
+      <img src="images/screenshot-20150108-step-01-loaded.png" alt="Step 01 complete!">
       
       <p>We're on our way.</p>
 
@@ -128,15 +134,15 @@
   "name": "My Assigned Issues",
   "version": "1.0",
   "icons": {
-    "19":"img/GitHub-Mark-19px.png",
-    "38":"img/GitHub-Mark-38px.png",
-    "64":"img/GitHub-Mark-64px.png",
-    "128":"img/GitHub-Mark-128px.png"
+    "19":"img/icon-19px.png",
+    "38":"img/icon-38px.png",
+    "64":"img/icon-64px.png",
+    "128":"img/icon-128px.png"
   },
   "browser_action": {
     "default_icon": {
-      "19":"img/GitHub-Mark-19px.png",
-      "38":"img/GitHub-Mark-38px.png"
+      "19":"img/icon-19px.png",
+      "38":"img/icon-38px.png"
     },
     "default_popup": "popup.html"
   }
@@ -144,6 +150,8 @@
 </code></pre>
 
       <p>We can verify that things are working by reloading out extension and testing the popup:</p>
+
+      <img src="images/screenshot-20150108-step-02-blank-popup-loaded.png" alt="Our blank popup.html in action.">
       
       <p>Great! Now let's add some structure to our popup.html:</p>
       
@@ -179,8 +187,6 @@
 
       <p>Our github_api.js library has two methods that we can make use of for the purpose of this codelab:</p>
 
-      <p>To use the file, make sure you download and add the file to your project. You cannot use external resources. You can obtain that file from the repo in the resources directory.</p>
-
 <pre><code>/**
 *
 * Get who I am
@@ -199,6 +205,10 @@ GitHub.getMe(token)
 */
 GitHub.getMyIssues(token) 
 </code></pre>
+
+      <p><blockquote>Tip: You don't have to paste that code block into your popup.js; it's only the definition of the method. Keep reading below for more code!</blockquote></p>
+
+      <p>To use the file, make sure you download and add the file to your project. You cannot use external resources. You can obtain that file from the repo in the resources directory.</p>
       
       <p>Once added, we can begin writing code within popup.js to handle talking to the API:</p>
 
@@ -210,7 +220,8 @@ GitHub.getMyIssues(myToken).then(function (issues) {
   // {array of object} issues
   // definition: https://developer.github.com/v3/issues/#list-issues
   //
-  //  IMPLEMENT: loop over issues and append list item(s)
+  //  YOUR CODELAB TASK: 
+  //    loop over issues and append list item(s)
   //
 
 });
@@ -220,7 +231,8 @@ GitHub.getMe(myToken).then(function (me) {
   // {object} me
   // definition: https://developer.github.com/v3/users/#get-the-authenticated-user
   //
-  //  IMPLEMENT: set username and avatar in DOM
+  //  YOUR CODELAB TASK: 
+  //    set username and avatar in DOM
   //
 
 });
@@ -259,15 +271,15 @@ GitHub.getMe(myToken).then(function (me) {
   "name": "My Assigned Issues",
   "version": "1.0",
   "icons": {
-    "19":"img/GitHub-Mark-19px.png",
-    "38":"img/GitHub-Mark-38px.png",
-    "64":"img/GitHub-Mark-64px.png",
-    "128":"img/GitHub-Mark-128px.png"
+    "19":"img/icon-19px.png",
+    "38":"img/icon-38px.png",
+    "64":"img/icon-64px.png",
+    "128":"img/icon-128px.png"
   },
   "browser_action": {
     "default_icon": {
-      "19":"img/GitHub-Mark-19px.png",
-      "38":"img/GitHub-Mark-38px.png"
+      "19":"img/icon-19px.png",
+      "38":"img/icon-38px.png"
     },
     "default_popup": "popup.html"
   },
@@ -275,7 +287,36 @@ GitHub.getMe(myToken).then(function (me) {
 }
 </code></pre>
 
-      <p>Now, presuming all things are good, we should have some issues loading!</p>
+      <p>Finally, to make things a little more viewable in our window, let's add some basic CSS:</p>
+
+<pre><code>body {
+    width: 400px;
+}
+
+#user-props {
+  display: flex;
+}
+
+#user-props div {
+  padding: 0.5em;
+}
+
+#avatar {
+  flex-grow: 0;
+}
+
+#avatar img {
+  max-width: 100px;
+}
+
+#username {
+  flex-grow: 2;
+}
+</code></pre>
+
+      <p>After we've completed your implementation, reload the extension with Ctrl+R or the Reload link and we should have some data loading in our popup:</p>
+
+      <img src="images/screenshot-20150108-step-02-loaded.png" alt="Step 01 complete!">
 
       <p><blockquote>Stuck? Check the step-02 folder for a solution.</blockquote></p>
       
@@ -299,15 +340,15 @@ GitHub.getMe(myToken).then(function (me) {
   "name": "My Assigned Issues",
   "version": "1.0",
   "icons": {
-    "19":"img/GitHub-Mark-19px.png",
-    "38":"img/GitHub-Mark-38px.png",
-    "64":"img/GitHub-Mark-64px.png",
-    "128":"img/GitHub-Mark-128px.png"
+    "19":"img/icon-19px.png",
+    "38":"img/icon-38px.png",
+    "64":"img/icon-64px.png",
+    "128":"img/icon-128px.png"
   },
   "browser_action": {
     "default_icon": {
-      "19":"img/GitHub-Mark-19px.png",
-      "38":"img/GitHub-Mark-38px.png"
+      "19":"img/icon-19px.png",
+      "38":"img/icon-38px.png"
     },
     "default_popup": "popup.html"
   },
@@ -329,15 +370,15 @@ GitHub.getMe(myToken).then(function (me) {
   "name": "My Assigned Issues",
   "version": "1.0",
   "icons": {
-    "19":"img/GitHub-Mark-19px.png",
-    "38":"img/GitHub-Mark-38px.png",
-    "64":"img/GitHub-Mark-64px.png",
-    "128":"img/GitHub-Mark-128px.png"
+    "19":"img/icon-19px.png",
+    "38":"img/icon-38px.png",
+    "64":"img/icon-64px.png",
+    "128":"img/icon-128px.png"
   },
   "browser_action": {
     "default_icon": {
-      "19":"img/GitHub-Mark-19px.png",
-      "38":"img/GitHub-Mark-38px.png"
+      "19":"img/icon-19px.png",
+      "38":"img/icon-38px.png"
     },
     "default_popup": "popup.html"
   },
@@ -353,7 +394,8 @@ GitHub.getMe(myToken).then(function (me) {
 
 <pre><code>function updateIssues() {
   GitHub.getMyIssues(githubToken).then(function (issues) {
-    // TODO: Process results and store
+    // YOUR CODELAB TASK: 
+    //    Process results and store
   });
 }
 
@@ -366,7 +408,8 @@ updateIssues();
 
 <pre><code>function updateUser() {
   GitHub.getMe(githubToken).then(function (me) {
-    // TODO: Process results and store
+    //  YOUR CODELAB TASK: 
+    //    Process results and store
   });
 }
 
@@ -403,7 +446,7 @@ setInterval(updateUser, 60 * 60 * 1000);
 updateUser();
 </code></pre>
 
-      <p>Since we're working in the backround, it would be helpful to know when issues are available. We can use the chrome.browserAction.setBadgeText and chrome.browserAction.setBadgeBackgroundColor to display the number of issues on the browser action button:</p>
+      <p>Since we're working in the background, it would be helpful to know when issues are available. We can use the chrome.browserAction.setBadgeText and chrome.browserAction.setBadgeBackgroundColor to display the number of issues on the browser action button:</p>
 
 <pre><code>// Get one: https://github.com/settings/applications
 var githubToken = "YOUR_PERSONAL_TOKEN";
@@ -432,7 +475,6 @@ function updateIssues() {
     });
   
   });
-
 }
 
 //
@@ -451,23 +493,30 @@ updateUser();
       <p>Since we're now doing work in the background, we also need to update the popup.js so that we can use the locally stored data:</p>
 
 <pre><code>chrome.storage.local.get(['user', 'issues'], function(data) {
-  // IMPLEMENT: set username
+  //  YOUR CODELAB TASK:
+  //    set username
 
-  // IMPLEMENT: set avatar
+  //  YOUR CODELAB TASK: 
+  //    set avatar
 
-  // IMPLEMENT: set issue list
+  //  YOUR CODELAB TASK:
+  //    set issue list
 });
 </code></pre>
+
+      <p>When we've completed the above implementation, we should now have a badge:</p>
+
+      <img src="images/screenshot-20150108-step-03-loaded.png" alt="Badge text applied to icon.">
 
       <p><blockquote>Stuck? Check the step-03 folder for a solution.</blockquote></p>
 
       <h3>
-        <a id="step-02-popup" class="anchor" href="#step-02-popup" aria-hidden="true">
+        <a id="step-04-options" class="anchor" href="#step-04-options" aria-hidden="true">
           <span class="octicon octicon-link"></span>
         </a>Adding options on context menu
       </h3>
 
-      <p>While defining our token in our code might be simple for us, if we have other users, that would be an issues. We can instead add an options menu to our extension. Let's start by creating an options.html:</p>
+      <p>While defining our token in our code might be simple for us, if we have other users, that would be an issues. We can instead add an options menu to our extension. Let's start by creating an options.html and options.js:</p>
 
 <pre><code>➜ ~ touch options.html
 ➜ ~ touch js/options.js
@@ -480,15 +529,15 @@ updateUser();
   "name": "My Assigned Issues",
   "version": "1.0",
   "icons": {
-    "19":"img/GitHub-Mark-19px.png",
-    "38":"img/GitHub-Mark-38px.png",
-    "64":"img/GitHub-Mark-64px.png",
-    "128":"img/GitHub-Mark-128px.png"
+    "19":"img/icon-19px.png",
+    "38":"img/icon-38px.png",
+    "64":"img/icon-64px.png",
+    "128":"img/icon-128px.png"
   },
   "browser_action": {
     "default_icon": {
-      "19":"img/GitHub-Mark-19px.png",
-      "38":"img/GitHub-Mark-38px.png"
+      "19":"img/icon-19px.png",
+      "38":"img/icon-38px.png"
     },
     "default_popup": "popup.html"
   },
@@ -500,7 +549,11 @@ updateUser();
 }  
 </code></pre>
 
-      <p>Now when right-clicking on our icon, you'll see a new option, "Options". Now we can add some structure so that we can save data:</p>
+      <p>When right-clicking on our icon, you'll see a new option, "Options".</p>
+
+      <img src="images/screenshot-20150108-options-added.png" alt="Options item added to menu">
+
+      <p>We can add some structure so that we can save data:</p>
 
 <pre><code>
 &lt;html&gt;
@@ -522,7 +575,11 @@ updateUser();
 &lt;/html&gt;
 </code></pre>
 
-      <p>Nothing special, just a basic form. Now let's write some code to save our data:</p>
+      <p>Nothing too exotic, just a basic form:</p>
+
+      <img src="images/screenshot-20150108-options-page.png" alt="our basic options page">
+
+      <p>Now let's write some code to save that options data:</p>
 
 <pre><code>var githubToken = document.getElementById('githubToken');
 var saveButton = document.getElementById('save');
